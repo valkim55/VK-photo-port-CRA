@@ -1,8 +1,12 @@
 import React, {useState} from 'react';
 
+//prevents the contact form from showing when user initially navigates to the homepage
+const [contactSelected, setContactSelected] = useState(false);
+
 import Nav from './components/Nav';
 import About from './components/About';
 import Gallery from './components/Gallery';
+import ContactForm from './components/Contact';
 
 function App() {
 
@@ -31,10 +35,23 @@ function App() {
 
   return (
     <div>
-        <Nav categories={categories} setCurrentCategory={setCurrentCategory} currentCategory={currentCategory}></Nav>
+        <Nav 
+            categories={categories} 
+            setCurrentCategory={setCurrentCategory} 
+            currentCategory={currentCategory}
+            contactSelected={contactSelected}    
+            setContactSelected={setContactSelected}
+        ></Nav>
         <main>
-            <Gallery currentCategory={currentCategory}></Gallery>
-            <About></About>
+            {!contactSelected ? (
+                <>
+                    <Gallery currentCategory={currentCategory}></Gallery>
+                    <About></About>
+                </>
+            ) : (
+                <ContactForm></ContactForm>
+            
+            )}
         </main>
     </div>
   );

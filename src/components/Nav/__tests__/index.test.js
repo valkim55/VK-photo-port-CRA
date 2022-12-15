@@ -1,5 +1,5 @@
 import React from 'react';
-import Nav from '..';
+import Nav from '../../Nav';
 
 import { render, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
@@ -14,6 +14,8 @@ const categories = [
 // mock functions to use as props
 const mockCurrentCategory = jest.fn();
 const mockSetCurrentCategory = jest.fn();
+const mockContactSelected = jest.fn();
+const mockSetContactSelected = jest.fn();
 
 afterEach(cleanup);
 
@@ -26,6 +28,8 @@ describe('Nav component', () => {
             categories={categories}
             setCurrentCategory={mockSetCurrentCategory}
             currentCategory={mockCurrentCategory}
+            contactSelected={mockContactSelected}
+            setContactSelected={mockSetContactSelected}
         />);
     });
 
@@ -36,6 +40,8 @@ describe('Nav component', () => {
             categories={categories}
             setCurrentCategory={mockSetCurrentCategory}
             currentCategory={mockCurrentCategory}
+            contactSelected={mockContactSelected}
+            setContactSelected={mockSetContactSelected}
         />);
 
         // test and compare if the expected and actual outcomes match
@@ -52,6 +58,8 @@ describe('emoji is visible', () => {
             categories={categories}
             setCurrentCategory={mockSetCurrentCategory}
             currentCategory={mockCurrentCategory}
+            contactSelected={mockContactSelected}
+            setContactSelected={mockSetContactSelected}
         />);
 
         // can also query by aria-label value
@@ -66,6 +74,8 @@ describe('links are visible', () => {
             categories={categories}
             setCurrentCategory={mockSetCurrentCategory}
             currentCategory={mockCurrentCategory}
+            contactSelected={mockContactSelected}
+            setContactSelected={mockSetContactSelected}
         />);
         expect(getByTestId('link')).toHaveTextContent('Oh Snap!');
         expect(getByTestId('about')).toHaveTextContent('About me');
