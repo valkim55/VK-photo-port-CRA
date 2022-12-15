@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 // import validate function
 import {validateEmail} from '../../utils/helpers';
@@ -7,13 +7,13 @@ function ContactForm() {
 
     // declare & define an error message Hook for isValid, so it can be reused for different error that occurs
     // initial state of the error message is an empty string
-    const [errorMessage, setErrorMessage] = useState('');
+    //const [errorMessage, setErrorMessage] = useState('');
 
     // set the initial state to empty string so the forms fields refresh on every load
-    const [formState, setFormState] = useState({ name: '', email: '', message: ''});
+    //const [formState, setFormState] = useState({ name: '', email: '', message: ''});
 
     // destructure formState object
-    const {name, email, message} = formState;
+    const {name, email, message} = {name: 'Pikachu', email: 'pikachu@gmail.com', message: 'hello'};
 
     // this function will sync the internal state of the component formState with the user input coming from the DOM
     // the onChange event listener will ensure that the handleChange function fires whenever a keystroke(each letter) is typed into the input field for 'name'
@@ -25,37 +25,37 @@ function ContactForm() {
             console.log(isValid);
             
             // if the email isn't valid show the preset error message, if the email is valid the message will be empty
-            if(!isValid) {
-                setErrorMessage('Your email is invalid');
-            } else {
-                setErrorMessage('');
-            }
+            // if(!isValid) {
+            //     setErrorMessage('Your email is invalid');
+            // } else {
+            //     setErrorMessage('');
+            // }
 
         } else {
-            if(!e.target.value.length) {
-                setErrorMessage(`${e.target.name} is required`);
-            } else {
-                setErrorMessage('');
-            }
+            // if(!e.target.value.length) {
+            //     setErrorMessage(`${e.target.name} is required`);
+            // } else {
+            //     setErrorMessage('');
+            // }
         }
 
-        // console.log('errorMessage', errorMessage);
     }
     //console.log(formState);
 
     // function to handle the submission of the form data
     function handleSubmit(e) {
         e.preventDefault();
+
+        // if(errorMessage) {
+        //     return <div>
+        //         <p className="error-text">{errorMessage}</p>
+        //     </div>
+        // } else {
+        //     //setFormState({ [e.target.name]: e.target.value });
+        //     //console.log('Form', formState);
+        // }
         
-         // using setFormState function to update the formState value for the name property
-        if(errorMessage) {
-        <div>
-            <p className="error-text">{errorMessage}</p>
-        </div> 
-        } else {
-            setFormState({ ...formState, [e.target.name]: e.target.value})
-        }
-        console.log(formState);
+        
     }
 
     return (

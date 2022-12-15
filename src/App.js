@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 
-//prevents the contact form from showing when user initially navigates to the homepage
-const [contactSelected, setContactSelected] = useState(false);
-
 import Nav from './components/Nav';
 import About from './components/About';
 import Gallery from './components/Gallery';
 import ContactForm from './components/Contact';
+
+//prevents the contact form from showing when user initially navigates to the homepage
+const [contactSelected, setContactSelected] = useState(false);
 
 function App() {
 
@@ -31,7 +31,7 @@ function App() {
             description: "Fields, farmhouses, waterfalls, and the beauty of nature"
         }
     ]);
-    const [currentCategory, setCurrentCategory] = useState(categories[0]);
+    const [currentCategory, setCurrentCategory] = useState('');
 
   return (
     <div>
@@ -49,7 +49,8 @@ function App() {
                     <About></About>
                 </>
             ) : (
-                <ContactForm></ContactForm>
+                // <ContactForm></ContactForm>
+                <About></About>
             
             )}
         </main>
