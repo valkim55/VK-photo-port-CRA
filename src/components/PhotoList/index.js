@@ -1,8 +1,12 @@
-// the purpose of this component is to handle the photo rendering logic. now that you can show more than one static photo on the gallery page, you need to make sure the correct category is displayed that represents that image
 import React, { useState } from 'react';
+
+import Modal from '../Modal/index';
 
 // instead of props can use destructured category object as {category} as an argument for PhotoList function
 const PhotoList = ({category}) => {
+
+    //state that will control whether modal is open or not - clicked or not
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     // using .map method to map through the array of categories with their photos and display them
     const [photos] = useState(
@@ -110,13 +114,28 @@ const PhotoList = ({category}) => {
     // if it doesn't deploy, bring back .default
     const currentPhotos = photos.filter((photo) => photo.category === category);
 
+    // managing current photo state and making this data accessible to Modal by passing it as a props
+    const [currentPhoto, setCurrentPhoto] = useState();
+
+        //declare toggleModal function
+        const toggleModal = (image, i) => {
+            // updating current photo state with the retrieved data through the click event
+            setCurrentPhoto({ ...image, index: i});
+
+            // the click handler will update isModalOPen to true (because toggleModal happens on a click and isModalOpen was initially set to false, so !isModalOpen makes it true)
+            setIsModalOpen(!isModalOpen);
+            //console.log('smth happened')
+        }
+
     return (
         <div>
+            { isModalOpen && <Modal currentPhoto={currentPhoto} onClose={toggleModal} />}
             <div className="flex-row"> {currentPhotos.map((image, i) => (
                 <img
                     src={require(`../../assets/small/${category}/${i}.jpg`)}
                     alt={image.name}
                     className="img-thumbnail mx-1"
+                    onClick={() => toggleModal(image, i)}
                     key={image.name}
                 />
             ))}
