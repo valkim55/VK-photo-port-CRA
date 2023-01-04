@@ -1,5 +1,4 @@
 // the purpose of this component is to handle the photo rendering logic. now that you can show more than one static photo on the gallery page, you need to make sure the correct category is displayed that represents that image
-
 import React, { useState } from 'react';
 
 // instead of props can use destructured category object as {category} as an argument for PhotoList function
@@ -108,13 +107,14 @@ const PhotoList = ({category}) => {
 
     // here you're going through each photo in the photos array, trying to find every photo that matches the category selected by user
     // if the match is found, the photo is returned in an array and assigned to currentPhoto, then you .map through the currentPhotos array and render each photo that matches the category selected by user
+    // if it doesn't deploy, bring back .default
     const currentPhotos = photos.filter((photo) => photo.category === category);
 
     return (
         <div>
             <div className="flex-row"> {currentPhotos.map((image, i) => (
                 <img
-                    src={require(`../../assets/small/${category}/${i}.jpg`).default}
+                    src={require(`../../assets/small/${category}/${i}.jpg`)}
                     alt={image.name}
                     className="img-thumbnail mx-1"
                     key={image.name}

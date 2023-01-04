@@ -5,33 +5,35 @@ import About from './components/About';
 import Gallery from './components/Gallery';
 import ContactForm from './components/Contact';
 
-//prevents the contact form from showing when user initially navigates to the homepage
-const [contactSelected, setContactSelected] = useState(false);
+
 
 function App() {
 
-    // moved categories state and its setter from Nav into here because we need currentCategory be accessible to gallery as well, so it should be placed in a parent component
-    // to keep the code DRY define the categories in an array and then map through this array to list each category
-    // use object literals for each category so the data can be reused elsewhere in the app
+    //prevents the contact form from showing when user initially navigates to the homepage
+    const [contactSelected, setContactSelected] = useState(false);
+
+    /* moved categories state and its setter from Nav into here because we need currentCategory be accessible to Gallery as well, 
+    since Gallery is not a child of Nav you can't pass categories as props from Gallery to Nav, instead you lifting the categories to the parent component - App, 
+    and then pass the categories to Nav inside of App.js*/    
     const [categories] = useState([
         {
-            name: "Commercial",
+            name: "commercial",
             description: "Photos of grocery stores, food trucks, and other commercial projects"
         },
         {
-            name: "Portraits",
+            name: "portraits",
             description: "Portraits of people in my life"
         },
         {
-            name: "Food",
+            name: "food",
             description: "Delicious delicacies"
         },
         {
-            name: "Landscape",
+            name: "landscape",
             description: "Fields, farmhouses, waterfalls, and the beauty of nature"
         }
     ]);
-    const [currentCategory, setCurrentCategory] = useState('');
+    const [currentCategory, setCurrentCategory] = useState(categories[0]);
 
   return (
     <div>
@@ -49,8 +51,7 @@ function App() {
                     <About></About>
                 </>
             ) : (
-                // <ContactForm></ContactForm>
-                <About></About>
+                <ContactForm></ContactForm>
             
             )}
         </main>
